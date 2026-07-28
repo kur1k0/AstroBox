@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Astro Box
+Exec=bin/M5CardputerZero-AstroBox
+Terminal=false
+Icon=share/images/astro-box.png
+Type=Application

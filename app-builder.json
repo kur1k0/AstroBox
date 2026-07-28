@@ -1,0 +1,12 @@
+{
+  "name": "Astro Box",
+  "package": "cardputerzero-astro-box",
+  "package_name": "cardputerzero-astro-box",
+  "version": "0.1.0",
+  "app_name": "Astro Box",
+  "bin_name": "M5CardputerZero-AstroBox",
+  "description": "Astro Box lets you create, explore, and share interactive N-body universes.",
+  "runtime": "legacy-deb-only",
+  "lvgl_version": "9.5",
+  "caps": ["keyboard"]
+}

@@ -1,0 +1,7 @@
+build/
+dist/
+static_lib/
+tests/build/
+tests/output/
+*.deb
+.DS_Store
