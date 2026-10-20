@@ -1947,12 +1947,24 @@ void build_ui()
 int get_st7789v_fbdev(char *device_path, std::size_t buffer_size)
 {
     if (!device_path || buffer_size == 0) return -1;
+    // Some Cardputer Zero images expose the panel through the DRM driver as
+    // "panel-mipi-dbid" instead of "fb_st7789v"; the stable symlink is the
+    // most reliable name, so prefer it when present.
+    {
+        FILE *stable = std::fopen("/dev/fb_lcd", "r");
+        if (stable) {
+            std::fclose(stable);
+            std::snprintf(device_path, buffer_size, "%s", "/dev/fb_lcd");
+            return 0;
+        }
+    }
     FILE *framebuffers = std::fopen("/proc/fb", "r");
     if (!framebuffers) return -1;
     char line[256];
     int framebuffer_number = -1;
     while (std::fgets(line, sizeof(line), framebuffers)) {
-        if (std::strstr(line, "fb_st7789v") &&
+        if ((std::strstr(line, "fb_st7789v") || std::strstr(line, "panel-mipi") ||
+             std::strstr(line, "dbid")) &&
             std::sscanf(line, "%d", &framebuffer_number) == 1) break;
     }
     std::fclose(framebuffers);
