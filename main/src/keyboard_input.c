@@ -45,7 +45,7 @@ volatile uint32_t LV_EVENT_KEYBOARD;
 static int open_restricted(const char *path, int flags, void *user_data) {
     int fd = open(path, flags);
     if (fd < 0)
-        fprintf(stderr, "无法打开 %s: %s\n", path, strerror(errno));
+        fprintf(stderr, "cannot open %s: %s\n", path, strerror(errno));
     return fd < 0 ? -errno : fd;
 }
 static void close_restricted(int fd, void *user_data) { close(fd); }
@@ -448,7 +448,7 @@ static int init_xkb(struct kbd_ctx *kc,
                     const char *layout, const char *locale)
 {
     kc->ctx = xkb_context_new(XKB_CONTEXT_NO_FLAGS);
-    if (!kc->ctx) { fprintf(stderr, "xkb_context_new 失败\n"); return -1; }
+    if (!kc->ctx) { fprintf(stderr, "xkb_context_new failed\n"); return -1; }
     xkb_context_set_log_fn(kc->ctx, uxkb_log);
 
     struct xkb_rule_names rmlvo = {
@@ -466,10 +466,10 @@ static int init_xkb(struct kbd_ctx *kc,
         kc->keymap = xkb_keymap_new_from_names(kc->ctx, &empty,
                                                XKB_KEYMAP_COMPILE_NO_FLAGS);
     }
-    if (!kc->keymap) { fprintf(stderr, "创建 keymap 失败\n"); return -1; }
+    if (!kc->keymap) { fprintf(stderr, "failed to create keymap\n"); return -1; }
 
     kc->state = xkb_state_new(kc->keymap);
-    if (!kc->state) { fprintf(stderr, "创建 xkb_state 失败\n"); return -1; }
+    if (!kc->state) { fprintf(stderr, "failed to create xkb_state\n"); return -1; }
 
                      
     if (!locale || !*locale) {
@@ -484,9 +484,9 @@ static int init_xkb(struct kbd_ctx *kc,
         kc->compose_state = xkb_compose_state_new(kc->compose_table,
                                                   XKB_COMPOSE_STATE_NO_FLAGS);
         if (!kc->compose_state)
-            fprintf(stderr, "警告：创建 compose_state 失败，禁用 compose\n");
+            fprintf(stderr, "warning: failed to create compose_state, compose disabled\n");
     } else {
-        fprintf(stderr, "警告：locale=%s 无 compose 表\n", locale);
+        fprintf(stderr, "warning: locale=%s has no compose table\n", locale);
     }
     return 0;
 }
@@ -527,15 +527,15 @@ void *keyboard_read_thread(void *argv) {
 
                                            
     kc.li = libinput_path_create_context(&interface, NULL);
-    if (!kc.li) { fprintf(stderr, "创建 libinput 上下文失败\n"); goto out; }
+    if (!kc.li) { fprintf(stderr, "failed to create libinput context\n"); goto out; }
 
     kc.dev = libinput_path_add_device(kc.li, device_path);
     if (!kc.dev) {
-        fprintf(stderr, "添加设备 %s 失败（可能需要 root 权限）\n", device_path);
+        fprintf(stderr, "failed to add device %s (root permissions may be required)\n", device_path);
         goto out;
     }
     if (!libinput_device_has_capability(kc.dev, LIBINPUT_DEVICE_CAP_KEYBOARD)) {
-        fprintf(stderr, "%s 不是键盘设备\n", device_path);
+        fprintf(stderr, "%s is not a keyboard device\n", device_path);
         goto out;
     }
 
@@ -553,7 +553,7 @@ void *keyboard_read_thread(void *argv) {
         { .fd = kc.repeat_fd, .events = POLLIN },
     };
 
-    printf("开始监听键盘输入 (%s)\n", device_path);
+    printf("listening for keyboard input (%s)\n", device_path);
     libinput_dispatch(kc.li);
 
     while (1) {

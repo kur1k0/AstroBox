@@ -2,7 +2,7 @@
   "package_name": "cardputerzero-astro-box",
   "app_name": "Astro Box",
   "bin_name": "M5CardputerZero-AstroBox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Astro Box lets you create, explore, and share interactive N-body universes.",
 
   "store": {

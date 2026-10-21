@@ -7,9 +7,9 @@ Portal: <https://dev.cardputer.cc/#/upload>
 
 ## Package
 
-- Debian package path: `build/cardputerzero-astro-box_1.0.0-m5stack1_arm64.deb`
+- Debian package path: `build/store-pkg/cardputerzero-astro-box_1.0.1-m5stack1_arm64.deb`
 - Package: `cardputerzero-astro-box`
-- Version: `1.0.0`
+- Version: `1.0.1`
 - Architecture: `arm64`
 - Maintainer: `kur1k0 <fuso@duck.com>`
 - APPLaunch desktop path: `usr/share/APPLaunch/applications/cardputerzero-astro-box.desktop` (source: `applications/cardputerzero-astro-box.desktop`)
