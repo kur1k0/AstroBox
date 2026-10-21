@@ -31,16 +31,6 @@
       "additional_hardware": false,
       "background_service": false,
       "external_display": false
-    },
-    "locales": {
-      "zh-CN": {
-        "title": "Astro Box",
-        "summary": "在 CardputerZero 上创建、探索并分享互动的 N 体引力宇宙。"
-      },
-      "ja": {
-        "title": "Astro Box",
-        "summary": "CardputerZero で N 体引力シミュレーションを作って探索し、QR で共有。"
-      }
     }
   }
 }

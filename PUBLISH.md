@@ -31,7 +31,7 @@ Portal: <https://dev.cardputer.cc/#/upload>
 - Author display name: `kur1k0`
 - Share code (4 letters/digits, unique store-wide): `ASTR`
 - Permissions (seven booleans): `camera=true` (QR scanning through libcamera); `microphone=false`, `imu=false`, `network=false`, `additional_hardware=false`, `background_service=false`, `external_display=false`
-- Locales: `zh-CN`, `ja` (localized title + summary in `app-builder.json`)
+- Locales: none (English listing only)
 
 ## Assets
 
